@@ -1,0 +1,89 @@
+---
+
+---
+
+<nav>
+    <ul>
+        <li><img src="/public/img/AskExperts.png" alt="Logo"></li>
+        <li><a href="/index/">Home</a></li>
+        <li><a href="/case_study/">Case Study</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><button popovertarget="popup">Login</button></li>
+    </ul>
+</nav>
+
+<div id="popup" popover>
+    
+    <form action="login" method="POST">
+        <h4>Dashboard Login</h4>
+        
+        <label for="email">Email address</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+
+
+<style>
+    @layer components {
+
+        
+            ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            background-color: #1B1B1BE8;
+            padding: 1rem;
+            margin: 0;
+        }
+
+            a {
+                color: var(--secondary02);
+                text-decoration: none;
+            }
+
+        
+        
+::backdrop {
+  background: #0003;
+  backdrop-filter: blur(4px);
+}
+
+[popover] {
+  opacity: 0;
+  translate: 0 -100%;
+  
+  transition: .6s;
+  transition-property: opacity, display, overlay, translate;
+  transition-behavior: allow-discrete;
+}
+
+
+:popover-open {
+  opacity: 1;
+  translate 0 0;
+  
+  @starting-style {
+    opacity: 0;
+    translate: 0 100%;
+  }
+}
+
+button {
+    background-color: var(--primary01);
+    border-radius: 19px;
+    padding: 9px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+ }   
+</style>

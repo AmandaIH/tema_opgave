@@ -1,0 +1,48 @@
+---
+import "../styles/global.css";
+const {title} = Astro.props;
+const {class: className, ...rest} = Astro.props;
+
+---
+
+<button class={className} {...rest}>{title}</button>
+
+
+<style>
+@layer components {
+button {
+    border-radius: 19px;
+    padding: 9px;
+}
+.services {
+    background-color: var(--primary03);
+    color: var(--secondary02);
+
+    &:hover {
+        background-color: var(--secondary02);
+        color: var(--primary03);
+        border: solid 2px var(--primary03);
+    }
+}
+.news {
+    background-color: var(--primary01);
+    color: var(--primary03);
+
+    &:hover {
+        background-color: #FFE5A2;
+    }
+}
+
+
+.subscribe {
+    background-color: var(--primary01);
+}
+
+.hero_buttons {
+    background-color: var(--primary03);
+    color: ;
+
+}
+
+}
+</style>
