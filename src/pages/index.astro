@@ -5,6 +5,10 @@ import Services from "../components/Services.astro";
 import ScrollingContainer from "../components/ScrollingContainer.astro";
 import Experience from "../components/Experience.astro";
 import CoreValues from "../components/CoreValues.astro";
+
+const coreValuesData = await fetch(
+  "https://frontend-design-theme.netlify.app/api/coreValues"
+).then((response) => response.json());
 ---
 
 <Layout>
@@ -29,7 +33,7 @@ import CoreValues from "../components/CoreValues.astro";
 </section>
 <ScrollingContainer />
 <Experience />
-<CoreValues />
+<CoreValues coreValuesData={coreValuesData} theme="light" />
 </Layout>
 
 <style>

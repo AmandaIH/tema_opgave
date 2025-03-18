@@ -1,20 +1,128 @@
 ---
 //@ts-nocheck
-const coreValuesData = await fetch(
-  "https://frontend-design-theme.netlify.app/api/coreValues"
-).then((response) => response.json());
+export interface CoreValuesProps {
+  coreValuesData: {
+    values: {
+      icon: string;
+      title: string;
+      description: string;
+      link: {
+        url: string;
+        text: string;
+      };
+    }[]; 
+  };
+  theme?: "light" | "dark"; 
+  sectionBackground?: string;  // Baggrundsfarve for hele sektionen
+  cardBackground?: string;     // Baggrundsfarve for hvert kort
+  cardTextColor?: string;      // Farve på teksten i hvert kort
+}
+
+const { coreValuesData, theme = "light", sectionBackground = "#fff", cardBackground = "#f8f8f8", cardTextColor = "#000" } = Astro.props;
 ---
 
-<ul>
-  {
-    coreValuesData.values.map((value) => (
-      <li class="value-item">
-        <img src={`/icons/${value.icon}.svg`} alt={value.title} />
-        <h4>{value.title}</h4>
-        <p>{value.description}</p>
-        <button><a href={value.link.url}>{value.link.text}</a></button>
-      </li>
-    ))
-  }
-</ul>
+<section class="corevalues" style={`--section-background: ${sectionBackground};`}>
+  <ul class={`core-values ${theme}`}>
+    {
+      coreValuesData.values.map((value) => (
+        <li class="value-item" style={`--card-background: ${cardBackground}; --card-text-color: ${cardTextColor};`}>
+          <div class="value-icon-wrapper">
+            <img src={`/icons/${value.icon}.svg`} 
+                 alt={value.title} 
+                 class="value-icon" />
+          </div>
+          <h4>{value.title}</h4>
+          <p>{value.description}</p>
+          <button>
+            <a href={value.link.url}>{value.link.text}</a>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</section>
 
+<style>
+  .corevalues {
+    grid-column: content;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--section-background, #fff);
+  }
+
+  .core-values {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .value-item {
+    padding: 1rem;
+    text-align: center;
+    width: 200px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+    background-color: var(--card-background, #f8f8f8);
+    color: var(--card-text-color, #000);
+  }
+
+  .value-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;  /* Bredde af den cirkulære baggrund */
+    height: 60px; /* Højde af den cirkulære baggrund */
+    border-radius: 50%; /* Gør den rund */
+    margin-bottom: 1rem;
+    background-color: var(--svg-icon-background, #ddd); /* Baggrundsfarve for SVG */
+  }
+
+  .value-icon {
+    width: 30px;  /* Størrelse på SVG-ikonet */
+    height: 30px; /* Størrelse på SVG-ikonet */
+    fill: var(--svg-icon-color, #000);  /* Farve på SVG-ikonet */
+  }
+
+  button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .core-values.light .value-item {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+  }
+
+  .core-values.dark .value-item {
+    background-color: var(--primary03);
+    color: var(--secondary02);
+  }
+
+  .core-values.light button {
+    background-color: #eee;
+    color: #000;
+  }
+
+  .core-values.dark button {
+    background-color: #555;
+    color: #fff;
+  }
+
+  /* Tema-specifik styling */
+  .core-values.light {
+    --svg-icon-background: #ddd;  /* Lys baggrund for SVG-ikonet */
+    --svg-icon-color: #000;       /* Sort farve for SVG-ikonet */
+  }
+
+  .core-values.dark {
+    --svg-icon-background: #333;  /* Mørk baggrund for SVG-ikonet */
+    --svg-icon-color: #fff;       /* Hvid farve for SVG-ikonet */
+  }
+</style>
