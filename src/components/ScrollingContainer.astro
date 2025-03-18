@@ -1,0 +1,102 @@
+---
+//@ts-nocheck
+const scrollingData = await fetch(
+  "https://frontend-design-theme.netlify.app/api/financialProjections"
+).then((response) => response.json());
+---
+
+<section>
+<div class="textBtn">
+    <div>
+    <h2>Financial Projections</h2>
+    <p>Financial projections are essential for planning and monitoring a company’s performance.<br> They provide insights into potential revenue, expenses, and profitability over specific periods.</p>
+    </div>
+    <div>
+    <button id="scroll-left"><img src="/src/icons/arrow-left.svg" alt="Arrow"></button>
+    <button id="scroll-right"><img src="/src/icons/arrow--right.svg" alt="Arrow"></button>
+    </div>
+</div>
+    <ul class="scroll-container">
+        {
+        scrollingData.values.map((value) => (
+        <li>
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+        </li>
+        ))
+        }
+    </ul>
+    
+</section>
+
+<script>
+    const scrollContainer = document.querySelector('.scroll-container');
+    const leftBtn = document.getElementById('scroll-left');
+    const rightBtn = document.getElementById('scroll-right');
+  
+    leftBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+  
+    rightBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  </script>
+
+<style>
+section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  grid-column: full;
+  background-color: var(--secondary01);
+
+  display: grid;
+  grid-template-columns:
+    [full-start] 1fr [content-start] minmax(0, var(--content-width)) [content-end] 1fr [full-end];
+}
+
+.textBtn {
+    margin-top: 3rem;
+    grid-column: content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+ul {
+    grid-column: content;
+    display: flex;
+    overflow-x: auto;
+    list-style: none;
+
+  padding: 1rem; 
+
+  gap: 2rem;
+  scroll-behavior: smooth;
+}
+
+li:nth-child(2) {
+    background-color: var(--primary03);
+    color: var(--secondary02);
+
+}
+
+li {
+  flex-basis: min(90%, 400px);
+  flex-shrink: 0;
+
+  background: #EBEBEB;
+  color: var(--primary03);
+  padding: 1rem;
+  max-width: 35ch;
+  border-radius: 1rem;
+}
+
+.scroll-container {
+  scrollbar-width: none; /* Firefox */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+</style>

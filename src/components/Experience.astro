@@ -1,0 +1,99 @@
+<section class="experience">
+
+<div class="all">
+<div class="text">
+<p>EXPERIENCE</p>
+<h1>More than 25 years of experience</h1>
+<p>3000+ our clients are insured around the World</p>
+</div>
+
+<div class="stats">
+    <div class="stat-container">
+    <div class="stat" style="--percent: 85"></div>
+    <p>Consistency</p>
+    </div>
+    <div class="stat-container">
+    <div class="stat" style="--percent: 95"></div>
+    <p>Improvement</p>
+    </div>
+    <div class="stat-container">
+    <div class="stat" style="--percent: 90"></div>
+    <p>Branching</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+ @layer component {
+
+.experience {
+    grid-column: full;
+    background-color: var(--primary01);
+
+    display: grid;
+    grid-template-columns:
+    [full-start] 1fr [content-start] minmax(0, var(--content-width)) [content-end] 1fr [full-end];
+}
+
+.all {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    grid-column: content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  width: min(400px, 100% - 1rem);
+}
+
+.stat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center;
+}
+
+.stat {
+  --p: calc(var(--percent) * 1%);
+  --border-width: 5px;
+  --border-color: var(--secondary02);
+  aspect-ratio: 1;
+  width: 150px;
+  border-radius: calc(Infinity * 1px);
+  border: var(--border-width) solid #0000;
+  background: 
+    radial-gradient(circle at 50% calc(var(--border-width) / 2), var(--border-color) calc(var(--border-width) / 2), transparent 0) border-box,
+    linear-gradient(var(--primary01), var(--primary01)) padding-box,
+    conic-gradient(var(--border-color) var(--p), gray 0) border-box;
+  
+  display: grid;
+  counter-reset: count var(--percent);
+  
+  &::before,
+  &::after {
+    grid-area: 1 / 1;
+  }
+  
+  &::after {
+    content: counter(count) "%";
+    place-self: center;
+  }
+  
+  &::before {
+    content: '';
+    aspect-ratio: 1;
+    border-radius: calc(Infinity * 2px);
+    width: calc(var(--border-width) * 4);
+    background: var(--primary03);
+    border-color: solid 1px var(--secondary02);
+    offset-path: border-box;
+    offset-distance: var(--p);
+    offset-anchor: 50% calc(50% - var(--border-width) / 2);
+  }
+}
+    }
+  </style>

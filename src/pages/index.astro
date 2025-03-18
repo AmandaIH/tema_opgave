@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Services from "../components/Services.astro";
+import ScrollingContainer from "../components/ScrollingContainer.astro";
+import Experience from "../components/Experience.astro";
+import CoreValues from "../components/CoreValues.astro";
 ---
 
 <Layout>
@@ -24,9 +27,13 @@ import Services from "../components/Services.astro";
   </ul>
   </div>
 </section>
+<ScrollingContainer />
+<Experience />
+<CoreValues />
 </Layout>
 
 <style>
+@layer component {
   .whattoexpect {
     grid-column: content;
     display: grid;
@@ -78,4 +85,28 @@ figure {
   display: inline-block;
 }
 
+ul {
+  display: grid;
+  gap: 1rem;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  font-size: 1rem;
+  color: #595566;
+}
+
+li:before {
+  content: '';
+  width: 1.6rem;
+  height: 1lh;
+  background: var(--checkmark-icon) 50% 50% / 100% auto no-repeat;
+  background-position: 50% 50%;
+  background-size: 100% auto;
+}
+}
 </style>
