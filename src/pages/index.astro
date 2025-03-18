@@ -8,9 +8,74 @@ import Services from "../components/Services.astro";
 
   <Hero />
   <Services />
-  
+  <section class="whattoexpect">
+    <div>
+  <figure>
+    <img class="people" src="/public/img/whattoexpect.png" alt="People">
+  </figure>
+  </div>
+  <div>
+  <p class="yellow">WE'LL WORK WITH YOU</p>
+  <h3>What To Expect</h3>
+  <p>Our collaboration is built on transparency, efficiency, and measurable results. Together, we create strategies tailored to your unique needs and goals.</p>
+  <ul>
+    <li>Collaborate to build actionable strategies that drive sustainable growth and deliver tangible outcomes.</li>
+    <li>Identify opportunities to optimize processes and implement impactful solutions with measurable results.</li>
+  </ul>
+  </div>
+</section>
 </Layout>
 
 <style>
+  .whattoexpect {
+    grid-column: content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+figure {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  
+  &::before {
+    content: '';
+    background: #4EAF4E;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    z-index: -1;
+    border-radius: 9px;
+  }
+
+  &::after {
+      content: '';
+    background: url(/public/img/Pattern.png);
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: -3rem;
+    left: -3rem;
+    z-index: -2;
+    }
+}
+.people {
+  inline-size: 100%;
+  display: block;
+  border-radius: 9px;
+}
+
+.whattoexpect > div {
+  max-width: 100%;
+}
+
+.yellow {
+  background-color: #FFCC4A;
+  border-radius: 9px;
+  display: inline-block;
+}
 
 </style>

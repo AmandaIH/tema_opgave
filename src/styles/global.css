@@ -21,7 +21,6 @@ body {
     [full-start] 1fr [content-start] minmax(0, var(--content-width))
     [content-end] 1fr [full-end];
   grid-template-rows: 6rem auto 1fr;
-  position: relative;
 
   > * {
     grid-column: full;
