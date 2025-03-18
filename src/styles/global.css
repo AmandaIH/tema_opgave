@@ -12,54 +12,52 @@
 
   /* Tekst */
 
-  --content-width: 50rem;
+  --content-width: 65vw;
 }
 
 body {
   display: grid;
-  grid-template-columns: 1fr [content] minmax(0, var(--content-width)) 1fr;
+  grid-template-columns:
+    [full-start] 1fr [content-start] minmax(0, var(--content-width))
+    [content-end] 1fr [full-end];
+  grid-template-rows: 6rem auto 1fr;
+  position: relative;
 
   > * {
-    grid-column: 1 / -1;
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
   }
 }
 
 h1 {
   font-family: "Cabin";
   font-weight: 600;
-  font-size: 50px;
 }
 h2 {
   font-family: "Cabin";
   font-weight: 600;
-  font-size: 45px;
 }
 h3 {
   font-family: "Cabin";
   font-weight: 600;
-  font-size: 40px;
 }
 h4 {
   font-family: "Cabin";
   font-weight: 600;
-  font-size: 35px;
 }
 h5 {
   font-family: "Cabin";
   font-weight: 600;
-  font-size: 30px;
 }
 h6 {
   font-family: "Cabin";
   font-weight: 600;
-  font-size: 25px;
 }
 p {
   font-family: "Lato";
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.48;
-  color: #595566;
 }
 buttons {
   font-family: "Lato";

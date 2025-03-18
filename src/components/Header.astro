@@ -3,14 +3,16 @@
 ---
 
 <nav>
-    <ul>
-        <li><img src="/public/img/AskExperts.png" alt="Logo"></li>
+    <div class="nav-container">
+      <img src="/public/img/AskExperts.png" alt="Logo">  
+    <ul class="nav-links">
         <li><a href="/index/">Home</a></li>
         <li><a href="/case_study/">Case Study</a></li>
         <li><a href="/team/">Team</a></li>
         <li><a href="/about/">About</a></li>
-        <li><button popovertarget="popup">Login</button></li>
     </ul>
+    <button popovertarget="popup">Login</button>
+    </div>
 </nav>
 
 <div id="popup" popover>
@@ -32,24 +34,35 @@
 
 <style>
     @layer components {
-
-        
-            ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: space-between;
-            background-color: #1B1B1BE8;
-            padding: 1rem;
-            margin: 0;
+        nav {
+          grid-column: content;
         }
-
-            a {
-                color: var(--secondary02);
-                text-decoration: none;
+        a {
+            color: var(--secondary02);
+            text-decoration: none;
             }
 
-        
-        
+     .nav-container {
+      grid-column: content;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      margin: 0 auto;
+     }   
+
+     .nav-links {
+        list-style-type: none;
+        display: flex;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+  }
+       
+  form {
+    display: flex;
+    flex-direction: column;
+}
 ::backdrop {
   background: #0003;
   backdrop-filter: blur(4px);
@@ -81,9 +94,6 @@ button {
     padding: 9px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+
  }   
 </style>

@@ -3,12 +3,68 @@ import Services from "./Services.astro";
 ---
 
 <section class="hero">
-  <!-- Markup her -->
-
-  
-  <Services />
+  <div class="left">
+  <img class="pattern" src="/public/img/Pattern.png" alt="Mønster">
+  <div class="hero-content">
+  <h2>Empowering Your <br> Business Growth</h2>
+  <p>Discover tailored strategies and expert insights to take your business to the next level. Let us help you navigate challenges and achieve sustainable success.</p>
+  <button type="submit">Book a Meeting</button>
+ </div>
+</div>
+  <img class="right" src="/public/img/Photo.png" alt="Kvinde">
 </section>
 
 <style>
-  /* Styles her */
+  @layer components {
+  .hero {
+    grid-column: full;
+    background-color: var(--primary03);
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+    align-items: center;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .left {
+    grid-column: 1 / 2;
+    color: var(--secondary02);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .pattern {
+    transform: rotate(90deg); 
+    width: 8rem; 
+    height: auto;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--secondary02);
+    max-width: 65ch;
+    padding: 3rem;
+    position: relative;
+  }
+
+  .hero-content p {
+    color: var(--secondary02);
+  }
+  .right {
+    grid-column: 2 / 3;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  }
+
+  @layer overrides {
+    .hero {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
 </style>
