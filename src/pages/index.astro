@@ -6,9 +6,14 @@ import ScrollingContainer from "../components/ScrollingContainer.astro";
 import Experience from "../components/Experience.astro";
 import CoreValues from "../components/CoreValues.astro";
 
-const coreValuesData = await fetch(
-  "https://frontend-design-theme.netlify.app/api/coreValues"
-).then((response) => response.json());
+let coreValuesData = [];
+
+try {
+  const res = await fetch("https://frontend-design-theme.netlify.app/api/coreValues");
+  coreValuesData = await res.json();
+} catch (error) {
+  console.error("Failed to fetch core values data:", error);
+}
 ---
 
 <Layout>
@@ -17,7 +22,7 @@ const coreValuesData = await fetch(
   <Services />
   <section class="whattoexpect">
     <div>
-  <figure>
+  <figure class="figure-people">
     <img class="people" src="/public/img/whattoexpect.png" alt="People">
   </figure>
   </div>
@@ -34,6 +39,45 @@ const coreValuesData = await fetch(
 <ScrollingContainer />
 <Experience />
 <CoreValues coreValuesData={coreValuesData} theme="light" />
+
+<section class="contactUs">
+<div class="contactInfo">
+  <p class="yellow">PROCESS</p>
+  <h3>Contact Us. It's Easy.</h3>
+  <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative.</p>
+  <div class="infoBlock">
+  <img src="/public/icons/phone.svg" alt="Phone">
+  <div class="infoText">
+  <p>Call Today</p>
+  <p>+1 800 100 900</p>
+</div>
+</div>
+  <div class="infoBlock">
+  <img src="/public/icons/clock.svg" alt="Clock">
+  <div class="infoText">
+  <p>Monday To Friday</p>
+  <p>9AM - 5PM</p>
+</div>
+</div>
+  <div class="infoBlock">
+  <img src="/public/icons/pin.svg" alt="Pin">
+  <div class="infoText">
+  <p>USA Office</p>
+  <p>195 Devonshire St Boston, MA 02110</p>
+</div>
+</div>
+</div>
+<div class="pics">
+  <figure class="figure-onePerson">
+    <img class="onePerson" src="/public/img/lady.png" alt="Lady">
+  </figure>
+  <figure class="figure-more">
+    <img class="more" src="/public/img/more.png" alt="Two ladies talking">
+  </figure>
+  <img class="hands" src="/public/img/hands.png" alt="Hands gesturing">
+</div>
+</section>
+
 </Layout>
 
 <style>
@@ -49,8 +93,8 @@ figure {
   position: relative;
   width: 100%;
   margin: 0;
-  
-  &::before {
+}
+  .figure-people::before {
     content: '';
     background: #4EAF4E;
     height: 100px;
@@ -62,7 +106,7 @@ figure {
     border-radius: 9px;
   }
 
-  &::after {
+  .figure-people::after {
       content: '';
     background: url(/public/img/Pattern.png);
     height: 200px;
@@ -72,7 +116,7 @@ figure {
     left: -3rem;
     z-index: -2;
     }
-}
+
 .people {
   inline-size: 100%;
   display: block;
@@ -112,5 +156,74 @@ li:before {
   background-position: 50% 50%;
   background-size: 100% auto;
 }
+
+.contactUs {
+  grid-column: content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
+
+.pics {
+  display: grid;
+  grid-template-areas:  "a b"
+                        "a c";
+  gap: 0.5rem;
+}
+.onePerson {
+  grid-area: a;
+  object-fit: contain;
+}
+.more {
+  grid-area: b;
+  object-fit: contain;
+  border-radius: 15px;
+}
+.hands {
+  grid-area: c;
+  object-fit: contain;
+  border-radius: 15px;
+}
+.infoBlock {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.infoText {
+  display: flex;
+  flex-direction: column;
+}
+  .figure-onePerson::before {
+  content: '';
+  background: #4EAF4E;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  bottom: -1rem;
+  left: -1rem;
+  z-index: -1;
+  border-radius: 9px;
+}
+
+.figure-onePerson::after {
+  content: none; 
+}
+
+.figure-more::before {
+  content: none; 
+}
+
+.figure-more::after {
+  content: '';
+  background: url(/public/img/Pattern.png);
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  top: -3rem;
+  right: -3rem; 
+  z-index: -2;
+}
+}
+
 </style>
