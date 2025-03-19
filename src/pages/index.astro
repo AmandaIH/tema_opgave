@@ -68,12 +68,12 @@ try {
 </div>
 </div>
 <div class="pics">
-  <figure class="figure-onePerson">
+ 
     <img class="onePerson" src="/public/img/lady.png" alt="Lady">
-  </figure>
-  <figure class="figure-more">
+  
+ 
     <img class="more" src="/public/img/more.png" alt="Two ladies talking">
-  </figure>
+ 
   <img class="hands" src="/public/img/hands.png" alt="Hands gesturing">
 </div>
 </section>
@@ -92,6 +92,7 @@ try {
 figure {
   position: relative;
   width: 100%;
+  height: 100%;
   margin: 0;
 }
   .figure-people::before {
@@ -165,26 +166,7 @@ li:before {
   padding-bottom: 3rem;
 }
 
-.pics {
-  display: grid;
-  grid-template-areas:  "a b"
-                        "a c";
-  gap: 0.5rem;
-}
-.onePerson {
-  grid-area: a;
-  object-fit: contain;
-}
-.more {
-  grid-area: b;
-  object-fit: contain;
-  border-radius: 15px;
-}
-.hands {
-  grid-area: c;
-  object-fit: contain;
-  border-radius: 15px;
-}
+
 .infoBlock {
   display: flex;
   align-items: center;
@@ -194,18 +176,6 @@ li:before {
   display: flex;
   flex-direction: column;
 }
-  .figure-onePerson::before {
-  content: '';
-  background: #4EAF4E;
-  height: 100px;
-  width: 100px;
-  position: absolute;
-  bottom: -1rem;
-  left: -1rem;
-  z-index: -1;
-  border-radius: 9px;
-}
-
 .figure-onePerson::after {
   content: none; 
 }
@@ -214,15 +184,46 @@ li:before {
   content: none; 
 }
 
-.figure-more::after {
+/* .figure-more::after {
   content: '';
   background: url(/public/img/Pattern.png);
-  height: 200px;
-  width: 200px;
+  height: 5rem;
+  width: 5rem;
   position: absolute;
   top: -3rem;
   right: -3rem; 
   z-index: -2;
+} */
+}
+@layer overrides {
+  .pics {
+  display: grid;
+  grid-template-areas:
+    "a b"
+    "a c";
+    gap: 0.5rem;
+}
+
+.onePerson {
+  grid-area: a;
+  object-fit: contain;
+  height: 100%;
+}
+
+.more {
+  grid-area: b;
+  object-fit: contain;
+  border-radius: 15px;
+  width: 100%; 
+    max-width: 100%;
+}
+
+.hands {
+  grid-area: c;
+  object-fit: contain;
+  border-radius: 15px;
+  margin: 0; 
+  padding: 0;
 }
 }
 
