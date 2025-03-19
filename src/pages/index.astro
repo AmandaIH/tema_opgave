@@ -5,6 +5,7 @@ import Services from "../components/Services.astro";
 import ScrollingContainer from "../components/ScrollingContainer.astro";
 import Experience from "../components/Experience.astro";
 import CoreValues from "../components/CoreValues.astro";
+import Newsletter from "../components/Newsletter.astro";
 
 let coreValuesData = [];
 
@@ -68,15 +69,12 @@ try {
 </div>
 </div>
 <div class="pics">
- 
     <img class="onePerson" src="/public/img/lady.png" alt="Lady">
-  
- 
     <img class="more" src="/public/img/more.png" alt="Two ladies talking">
- 
   <img class="hands" src="/public/img/hands.png" alt="Hands gesturing">
 </div>
 </section>
+<Newsletter />
 
 </Layout>
 
@@ -184,19 +182,7 @@ li:before {
   content: none; 
 }
 
-/* .figure-more::after {
-  content: '';
-  background: url(/public/img/Pattern.png);
-  height: 5rem;
-  width: 5rem;
-  position: absolute;
-  top: -3rem;
-  right: -3rem; 
-  z-index: -2;
-} */
-}
-@layer overrides {
-  .pics {
+.pics {
   display: grid;
   grid-template-areas:
     "a b"
@@ -225,6 +211,10 @@ li:before {
   margin: 0; 
   padding: 0;
 }
+
+}
+@layer overrides {
+ 
 }
 
 </style>

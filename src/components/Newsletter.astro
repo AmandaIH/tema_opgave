@@ -1,0 +1,115 @@
+<section class="newsletter-section">
+    <div class="newsletter-content">
+      <h2>Subscribe Our Newsletter</h2>
+      <p>Build stronger Customer Relationships with <strong>Consultalk</strong></p>
+    </div>
+  
+    <form class="newsletter-form" action="#" method="POST">
+      <input type="email" placeholder="your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  
+    <div class="background-elements"></div>
+  </section>
+  
+  <style>
+ @layer components {
+  .newsletter-section {
+    grid-column: content;
+    background-color: #121212;
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden; 
+    margin-top: 2rem;
+  }
+
+  .newsletter-content h2 {
+    margin: 0 0 10px;
+    font-size: 28px;
+  }
+
+  .newsletter-content p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    margin-top: 20px;
+    position: relative; 
+    z-index: 2; 
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    z-index: 2;
+    position: relative;
+  }
+
+  .newsletter-form input {
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    margin-right: 10px;
+    width: 250px;
+  }
+
+  .newsletter-form button {
+    background-color: #FDCB6E;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .newsletter-form button:hover {
+    background-color: #e5b650;
+  }
+  .background-elements {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 250px;
+    height: 250px;
+    pointer-events: none; 
+  }
+
+  .background-elements::before {
+    content: '';
+    position: absolute;
+    bottom: -4rem;
+    right: -2rem;
+    width: 120px;
+    height: 120px;
+    background-color: #4EAF4E;
+    border-radius: 9px;
+    transform: rotate(45deg); 
+    z-index: 1;
+  }
+
+  .background-elements::after {
+    content: '';
+    position: absolute;
+    bottom: 4rem;
+    right: -5rem;
+    width: 14rem;
+    height: 20rem;
+    background: url(/public/img/Pattern.png) no-repeat;
+    background-size: cover;
+    transform: rotate(45deg); 
+    z-index: 0;
+  }
+}
+
+
+  </style>
