@@ -4,25 +4,25 @@ let faqData = [];
 let errorMessage = "";
 
 try {
-  const res = await fetch('https://frontend-design-theme.netlify.app/api/faq'); // Din API URL
+  const res = await fetch('https://frontend-design-theme.netlify.app/api/faq'); 
   const data = await res.json();
   
   if (Array.isArray(data)) {
-    faqData = data; // Hvis API'en returnerer et array
+    faqData = data; 
   } else if (data && data.faq && Array.isArray(data.faq)) {
-    faqData = data.faq; // Hvis data.faq eksisterer og er et array
+    faqData = data.faq; 
   } else {
     throw new Error("API did not return valid FAQ data.");
   }
 } catch (error) {
   console.error("Failed to fetch FAQ data:", error);
-  errorMessage = "There was an error loading the FAQ data. Please try again later."; // Sæt en fejlmeddelelse
+  errorMessage = "There was an error loading the FAQ data. Please try again later."; 
 }
 ---
 
 <section class="faq">
   {errorMessage ? (
-    <p>{errorMessage}</p> // Hvis der er en fejl, vis fejlmeddelelsen
+    <p>{errorMessage}</p> 
   ) : faqData.length > 0 ? (
     faqData.map(({ id, question, answer }) => (
       <details name="accordion" {id}>
@@ -35,7 +35,7 @@ try {
       </details>
     ))
   ) : (
-    <p>Loading FAQ...</p> // Hvis faqData er tomt, vis "Loading"
+    <p>Loading FAQ...</p> 
   )}
 </section>
 

@@ -1,9 +1,154 @@
 ---
+//@ts-nocheck
 import Layout from "../layouts/Layout.astro";
+import Newsletter from "../components/Newsletter.astro";
 
+const employeesData = await fetch(
+  "https://frontend-design-theme.netlify.app/api/employees"
+).then((response) => response.json());
 
 ---
 
 <Layout>
+  <section class="banner">
+    <img src="/public/img/teamBanner.png" alt="Banner">
+  </section>
 
+  <section class="team-section">
+    <h2 class="team-title">Meet Our Great Team</h2>
+    <p class="team-description">
+      Welcome to our amazing team! We are a group of passionate individuals dedicated to excellence and innovation. Each member brings unique skills and experiences, working together to achieve our goals. Join us as we embark on exciting projects and create lasting impacts.
+    </p>
+
+    {employeesData.map(employee => {
+      console.log('Employees Data:', employeesData);
+      return (
+        <div class="team-card">
+          <img
+            src={employee.img}  
+  alt={employee.name}
+  class="team-image"
+          />
+          <span class="team-role">{employee.role}</span>
+          <h3 class="team-name">{employee.name}</h3>
+          <p class="team-short-description">{employee.description}</p>
+    
+          <div class="team-socials">
+            {employee.social_links.map((link, index) => (
+              <a href={link.url} target="_blank" rel="noopener noreferrer" key={index}>
+                <span set:html={link.icon}></span>
+              </a>
+            ))}
+          </div>
+    
+          <a href={`/team_single/${employee.slug}`} class="team-link">Read more</a>
+        </div>
+      );
+    })}
+    
+    </div>
+
+    <button class="join-button">Join our team</button>
+  </section>
+<Newsletter />
 </Layout>
+
+<style>
+  @layer components {
+    .banner {
+      grid-column: full;
+    }
+
+    .team-section {
+    grid-column: content;
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+
+    }
+
+    .team-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .team-description {
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 50px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .team-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .team-image {
+      width: 5rem;
+      height: 7rem;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 15px;
+    }
+
+    .team-role {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: gold;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .team-name {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .team-short-description {
+      color: #777;
+      margin: 10px 0 20px;
+    }
+
+    .team-socials {
+      display: flex;
+  justify-content: center; 
+  align-items: center;
+  color: black;
+    }
+    .team-socials span svg {
+      width: 20px;
+      height: 20px;
+      margin: 0 8px;
+      fill: black;
+    }
+
+    .team-link {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: currentColor;
+    }
+
+    .join-button {
+      margin-top: 50px;
+      padding: 12px 30px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+  }
+</style>

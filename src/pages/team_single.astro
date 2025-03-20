@@ -1,9 +1,46 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-
+// Hent data for en enkelt medarbejder
+const employeeData = await fetch(
+  "https://frontend-design-theme.netlify.app/api/employees/1" // Skift til den ønskede medarbejders ID
+).then((response) => response.json());
 ---
 
 <Layout>
-
+  <section>
+    {employeeData ? (
+      <div> 
+        <img src={employeeData.img} alt={employeeData.name} />
+        <h1>{employeeData.name}</h1>
+        <h2>{employeeData.title}</h2>
+        <p>{employeeData.description}</p>
+        <p>{employeeData.description_long}</p>
+        <h3>Past Experience</h3>
+        <p>{employeeData.past_experience}</p>
+        <div>
+          <h4>Social Links</h4>
+          <ul>
+            {employeeData.social_links.map((link) => (
+              <li>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.platform}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ) : (
+      <p>Loading or no employee data found.</p>
+    )}
+  </section>
 </Layout>
+
+<style>
+@layer components {
+section {
+    grid-column: content;
+}
+}
+</style>
