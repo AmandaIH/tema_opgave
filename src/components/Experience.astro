@@ -2,8 +2,8 @@
 
 <div class="all">
 <div class="text">
-<p>EXPERIENCE</p>
-<h1>More than 25 years of experience</h1>
+<p class="white">EXPERIENCE</p>
+<h1>More than 25 years<br> of experience</h1>
 <p>3000+ our clients are insured around the World</p>
 </div>
 
@@ -81,6 +81,8 @@
   &::after {
     content: counter(count) "%";
     place-self: center;
+    font-size: 2rem;
+    font-weight: 500;
   }
   
   &::before {
@@ -95,5 +97,25 @@
     offset-anchor: 50% calc(50% - var(--border-width) / 2);
   }
 }
+
+.white {
+  background-color: var(--secondary02);
+  border-radius: 9px;
+  width: fit-content;
+  font-size: 0.75rem;
+  font-family: var(--font-family-lato);
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+.text h1 {
+  font-family: var(--font-family-header);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.stat-container p {
+  font-weight: 500;
+}
+
     }
   </style>

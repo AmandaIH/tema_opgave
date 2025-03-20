@@ -16,6 +16,12 @@ import Services from "./Services.astro";
 
 <style>
   @layer components {
+
+    .hero h2 {
+      font-family: var(--font-family-header) !important;
+      font-size: 1.75rem;
+      font-weight: 550;
+    }
   .hero {
     grid-column: full;
     background-color: var(--primary03);
@@ -46,13 +52,17 @@ import Services from "./Services.astro";
     flex-direction: column;
     gap: 1rem;
     color: var(--secondary02);
-    max-width: 65ch;
+    max-width: 55ch;
     padding: 3rem;
     position: relative;
+    letter-spacing:0.1ch;
   }
 
   .hero-content p {
     color: var(--secondary02);
+    font-family: var(--font-family-lato);
+    font-size: 0.75em;
+    line-height: 1.2;
   }
   .right {
     grid-column: 2 / 3;
@@ -60,6 +70,14 @@ import Services from "./Services.astro";
     height: auto;
     object-fit: cover;
   }
+  button {
+    background-color: var(--secondary02);
+    border-radius: 19px;
+    padding: 9px;
+    color: var(--primary03);
+    width: fit-content;
+  }
+
   }
 
   @layer overrides {

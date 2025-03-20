@@ -10,7 +10,8 @@
   --secondary01: #f5f5f5;
   --secondary02: #ffffff;
 
-  /* Tekst */
+  --font-family-header: "Cabin", sans-serif;
+  --font-family-lato: "Lato", sans-serif;
 
   --content-width: 65vw;
 
@@ -22,46 +23,11 @@ body {
   grid-template-columns:
     [full-start] 1fr [content-start] minmax(0, var(--content-width))
     [content-end] 1fr [full-end];
-  grid-template-rows: 6rem auto 1fr;
+  grid-template-rows: auto auto auto;
 
   > * {
     grid-column: full;
     display: grid;
     grid-template-columns: subgrid;
   }
-}
-
-h1 {
-  font-family: "Cabin";
-  font-weight: 600;
-}
-h2 {
-  font-family: "Cabin";
-  font-weight: 600;
-}
-h3 {
-  font-family: "Cabin";
-  font-weight: 600;
-}
-h4 {
-  font-family: "Cabin";
-  font-weight: 600;
-}
-h5 {
-  font-family: "Cabin";
-  font-weight: 600;
-}
-h6 {
-  font-family: "Cabin";
-  font-weight: 600;
-}
-p {
-  font-family: "Lato";
-  font-weight: 400;
-  font-size: 16px;
-}
-buttons {
-  font-family: "Lato";
-  font-weight: 400;
-  font-size: 18px;
 }

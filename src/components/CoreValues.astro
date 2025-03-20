@@ -1,4 +1,5 @@
 ---
+
 //@ts-nocheck
 export interface CoreValuesProps {
   coreValuesData: {
@@ -10,31 +11,72 @@ export interface CoreValuesProps {
         url: string;
         text: string;
       };
-    }[]; 
+    }[];
   };
-  theme?: "light" | "dark"; 
-  sectionBackground?: string;  // Baggrundsfarve for hele sektionen
-  cardBackground?: string;     // Baggrundsfarve for hvert kort
-  cardTextColor?: string;      // Farve på teksten i hvert kort
+  theme?: "light" | "dark";
 }
 
-const { coreValuesData, theme = "light", sectionBackground = "#fff", cardBackground = "#f8f8f8", cardTextColor = "#000" } = Astro.props;
+const { coreValuesData, theme = "light" } = Astro.props;
+
+const themes = {
+  light: {
+    sectionBackground: "#F5F5F5",
+    cardBackground: "#FFFFFF",
+    cardTextColor: "#181818",
+    buttonBackground: "#181818",
+    buttonTextColor: "#FFFFFF",
+    svgBackground: "#181818",
+    svgColor: "#FFFFFF",
+    pColor: "#595566",
+    h4Color: "#181818",
+    linkColor: "#181818",
+  },
+  dark: {
+    sectionBackground: "#181818",
+    cardBackground: "#FFFFFF",
+    cardTextColor: "#181818",
+    buttonBackground: "#FFFFFF",
+    buttonTextColor: "#181818",
+    svgBackground: "#181818",
+    svgColor: "#FFFFFF",
+    pColor: "#595566",
+    h4Color: "#FFFFFF",
+    linkColor: "#181818",
+  },
+};
+
+const currentTheme = themes[theme];
 ---
 
-<section class="corevalues" style={`--section-background: ${sectionBackground};`}>
-  <ul class={`core-values ${theme}`}>
+
+
+<section class="corevalues" style={`background-color: ${currentTheme.sectionBackground};`}>
+
+  <div class="outerText" style={`background-color: ${currentTheme.sectionBackground};`}>
+    <div class="text">
+      <p class="subtitle" >GROWING WITH OUR CLIENTS</p>
+      <h2 style={`color: ${currentTheme.h4Color};`}>Our core values & principles</h2>
+      <p style={`color: ${currentTheme.h4Color};`}>Capitalize on low hanging fruit to identify a ballpark value added activity beta test. Override the digital divide with additional from DevOps.</p>
+    </div>
+    <div class="getintouch">
+      <button style={`background-color: ${currentTheme.buttonBackground}; color: ${currentTheme.buttonTextColor};`}>Get in touch</button>
+    </div>
+  </div>
+
+  <ul class="core-values">
     {
       coreValuesData.values.map((value) => (
-        <li class="value-item" style={`--card-background: ${cardBackground}; --card-text-color: ${cardTextColor};`}>
-          <div class="value-icon-wrapper">
+        <li class="value-item" style={`background-color: ${currentTheme.cardBackground}; color: ${currentTheme.cardTextColor};`}>
+          <div class="value-icon-wrapper" style={`background-color: ${currentTheme.svgBackground};`}>
             <img src={`/icons/${value.icon}.svg`} 
                  alt={value.title} 
-                 class="value-icon" />
+                 class="value-icon"
+                 style={`filter: invert(1);`} /> 
           </div>
-          <h4>{value.title}</h4>
-          <p>{value.description}</p>
-          <button>
-            <a href={value.link.url}>{value.link.text}</a>
+          <h4 style={`color: ${currentTheme.h4Color};`}>{value.title}</h4>
+          <p style={`color: ${currentTheme.pColor};`}>{value.description}</p>
+          <button style={`background-color: ${currentTheme.cardBackground}; color: ${currentTheme.buttonTextColor};`}>
+            <a href={value.link.url} style={`color: ${currentTheme.linkColor}; text-decoration: none;`}>{value.link.text}</a>
           </button>
         </li>
       ))
@@ -44,46 +86,42 @@ const { coreValuesData, theme = "light", sectionBackground = "#fff", cardBackgro
 
 <style>
   .corevalues {
-    grid-column: content;
-    padding: 2rem;
-    border-radius: 8px;
-    background-color: var(--section-background, #fff);
+    grid-column: full;
+    display: grid;
+    grid-template-columns:
+    [full-start] 1fr [content-start] minmax(0, var(--content-width)) [content-end] 1fr [full-end];
+    padding-bottom: 2rem;
   }
-
   .core-values {
-    display: flex;
-    gap: 1rem;
-    padding: 0;
-    list-style: none;
-    justify-content: center;
-    flex-wrap: wrap;
+  grid-column: content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
   }
 
   .value-item {
     padding: 1rem;
-    text-align: center;
-    width: 200px;
+    text-align: left;
+    width: 15rem;
     border-radius: 8px;
-    transition: transform 0.2s;
-    background-color: var(--card-background, #f8f8f8);
-    color: var(--card-text-color, #000);
   }
 
   .value-icon-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;  /* Bredde af den cirkulære baggrund */
-    height: 60px; /* Højde af den cirkulære baggrund */
-    border-radius: 50%; /* Gør den rund */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     margin-bottom: 1rem;
-    background-color: var(--svg-icon-background, #ddd); /* Baggrundsfarve for SVG */
   }
 
   .value-icon {
-    width: 30px;  /* Størrelse på SVG-ikonet */
-    height: 30px; /* Størrelse på SVG-ikonet */
-    fill: var(--svg-icon-color, #000);  /* Farve på SVG-ikonet */
+    width: 20px;
+    height: 20px;
   }
 
   button {
@@ -91,38 +129,38 @@ const { coreValuesData, theme = "light", sectionBackground = "#fff", cardBackgro
     padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 25px;
   }
 
-  .core-values.light .value-item {
-    background-color: #ffffff;
-    color: #000000;
-    border: 1px solid #ccc;
+  .outerText {
+    grid-column: content;
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .core-values.dark .value-item {
-    background-color: var(--primary03);
-    color: var(--secondary02);
+  .subtitle {
+    background-color: #FFCC4A;
+    border-radius: 2rem;
+    font-family: var(--font-family-lato);
+    font-size: 0.75rem;
+    width: fit-content;
+    padding: 0.2rem;
+    color: var(--primary03);
+  }
+  .getintouch {
+  align-self: end;   
+  justify-self: end; 
+  }
+  .getintouch button {
+    margin-top: 1rem;
   }
 
-  .core-values.light button {
-    background-color: #eee;
-    color: #000;
+  .text h2 {
+    font-family: var(--font-family-header);
+    font-size: 2rem;
   }
-
-  .core-values.dark button {
-    background-color: #555;
-    color: #fff;
-  }
-
-  /* Tema-specifik styling */
-  .core-values.light {
-    --svg-icon-background: #ddd;  /* Lys baggrund for SVG-ikonet */
-    --svg-icon-color: #000;       /* Sort farve for SVG-ikonet */
-  }
-
-  .core-values.dark {
-    --svg-icon-background: #333;  /* Mørk baggrund for SVG-ikonet */
-    --svg-icon-color: #fff;       /* Hvid farve for SVG-ikonet */
+  .text p {
+    font-size: 0.85rem;
   }
 </style>

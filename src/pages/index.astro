@@ -7,7 +7,7 @@ import Experience from "../components/Experience.astro";
 import CoreValues from "../components/CoreValues.astro";
 import Newsletter from "../components/Newsletter.astro";
 
-let coreValuesData = [];
+let coreValuesData = { values: [] };
 
 try {
   const res = await fetch("https://frontend-design-theme.netlify.app/api/coreValues");
@@ -30,7 +30,7 @@ try {
   <div>
   <p class="yellow">WE'LL WORK WITH YOU</p>
   <h3>What To Expect</h3>
-  <p>Our collaboration is built on transparency, efficiency, and measurable results. Together, we create strategies tailored to your unique needs and goals.</p>
+  <p class="grey">Our collaboration is built on transparency, efficiency, and measurable results. Together, we create strategies tailored to your unique needs and goals.</p>
   <ul>
     <li>Collaborate to build actionable strategies that drive sustainable growth and deliver tangible outcomes.</li>
     <li>Identify opportunities to optimize processes and implement impactful solutions with measurable results.</li>
@@ -39,7 +39,7 @@ try {
 </section>
 <ScrollingContainer />
 <Experience />
-<CoreValues coreValuesData={coreValuesData} theme="light" />
+<CoreValues coreValuesData={coreValuesData} theme="dark" />
 
 <section class="contactUs">
 <div class="contactInfo">
@@ -80,6 +80,13 @@ try {
 
 <style>
 @layer component {
+
+  h3 {
+    font-family: var(--font-family-header);
+  }
+  p {
+    font-family: var(--font-family-lato);
+  }
   .whattoexpect {
     grid-column: content;
     display: grid;
@@ -127,9 +134,13 @@ figure {
 }
 
 .yellow {
-  background-color: #FFCC4A;
+  background-color: var(--primary01);
   border-radius: 9px;
-  display: inline-block;
+  width: fit-content;
+  font-size: 0.75rem;
+  font-family: var(--font-family-lato);
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
 }
 
 ul {
@@ -210,6 +221,15 @@ li:before {
   border-radius: 15px;
   margin: 0; 
   padding: 0;
+}
+
+h3 {
+  font-family: var(--font-family-header);
+  font-size: 1.5rem;
+}
+
+.grey {
+  color: #595566;
 }
 
 }
