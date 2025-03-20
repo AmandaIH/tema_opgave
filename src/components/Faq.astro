@@ -1,5 +1,7 @@
 ---
-//@ts-check;
+//@ts-check
+import PlusIcon from "/public/icons/plus.svg";
+
 let faqData = [];
 let errorMessage = "";
 
@@ -18,53 +20,112 @@ try {
   console.error("Failed to fetch FAQ data:", error);
   errorMessage = "There was an error loading the FAQ data. Please try again later."; 
 }
+
 ---
 
 <section class="faq">
   {errorMessage ? (
-    <p>{errorMessage}</p> 
+    <p>{errorMessage}</p>
   ) : faqData.length > 0 ? (
-    faqData.map(({ id, question, answer }) => (
+    faqData.map(({ id, question, answer, linkBlock }) => (
       <details name="accordion" {id}>
         <summary>
-          <span>{question}</span>
+          <span>
+            {question}
+            <PlusIcon />
+          </span>
         </summary>
         <div class="answer">
-          <p>{answer}</p>
+          {Array.isArray(answer)
+            ? answer.map((a) => <p set:html={a} />)
+            : <p>{answer}</p>}
+          
+          {linkBlock && (
+            <a class="link-block" href={linkBlock.url} target="_blank">
+              {linkBlock.label}
+            </a>
+          )}
         </div>
       </details>
     ))
   ) : (
-    <p>Loading FAQ...</p> 
+    <p>Loading FAQ...</p>
   )}
 </section>
 
+
 <style>
   .faq {
-    grid-column: content;
-    margin-top: 3rem;
-    background: #f5f5f5;
-    padding: 2rem;
-  }
+  grid-column: content;
+  margin-top: 3rem;
+  background: #f5f5f5;
+  padding: 2rem;
+  max-inline-size: 75ch;
+}
 
-  details {
-    border-bottom: 1px solid #ddd;
-    padding: 1rem 0;
-  }
+details {
+  color: hsl(190 30% 12%);
+  border-bottom: 1px solid #dadada;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
-  summary {
-    font-size: 1.25rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
+details[open] {
+  --r: z 90deg;
+}
 
-  .answer {
-    margin-top: 1rem;
-    padding-left: 1rem;
-    color: #595566;
-  }
+summary {
+  font-weight: 700;
+  color: #181818;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 1rem;
+}
 
-  .answer p {
-    margin: 0;
-  }
+summary::marker,
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  inline-size: 100%;
+  gap: 1rem;
+}
+
+summary span svg {
+  inline-size: auto;
+  height: 1lh;
+  flex-shrink: 0;
+}
+
+.answer {
+  color: #595566;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+details[open] .answer {
+  opacity: 1;
+  max-height: 500px; /* juster efter behov */
+  margin-top: 0.5rem;
+}
+
+.answer > * + * {
+  margin-top: 1em;
+}
+
+.answer .link-block {
+  display: block;
+  margin-top: 1rem;
+}
+
 </style>
