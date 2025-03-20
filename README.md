@@ -17,3 +17,5 @@ const employeesData = await fetch(
 
 console.log(employeesData);
 ```
+
+Reflektering:
