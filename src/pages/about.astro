@@ -1,9 +1,152 @@
 ---
+//@ts-nocheck
+import CoreValues from "../components/CoreValues.astro";
 import Layout from "../layouts/Layout.astro";
+import Faq from "../components/Faq.astro";
+import Newsletter from "../components/Newsletter.astro";
 
+let coreValuesData = [];
 
+try {
+  const res = await fetch("https://frontend-design-theme.netlify.app/api/coreValues");
+  coreValuesData = await res.json();
+} catch (error) {
+  console.error("Failed to fetch core values data:", error);
+}
 ---
 
 <Layout>
+<div class="banner">
+<img src="/public/img/Banner.png" alt="banner">
+</div>
+
+<section class="ourVision">
+    <div class="text">
+        <p class="green">OUR VISION</p>
+        <h2>Turn your ideas into reality.</h2>
+        <p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test. Override the digital divide with additional from DevOps.</p>
+        <ul>
+            <li>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day.</li>
+            <li>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test override the digital.</li>
+        </ul>
+    </div>
+    <div class="picNfigure">
+        <img src="/public/img/peopleworking.png" alt="Peope working">
+    </div>
+    <div class="info">
+        <div class="stat">
+            <h2>1128+</h2>
+            <p>Successful Work</p>
+        </div>
+        <div class="stat">
+            <h2>908+</h2>
+            <p>Team member</p>
+        </div>
+        <div class="stat">
+            <h2>258+</h2>
+            <p>Happy Customers</p>
+        </div>
+        <div class="stat">
+            <h2>564+</h2>
+            <p>Creative Idea</p>
+        </div>
+    </div>
+    
+</section>
+<CoreValues coreValuesData={coreValuesData} theme="light" />
+
+<section class="ourTeamFew">
+    <div class="firstText">
+        <p class="yellow">OUR TEAM</p>
+        <h2>We champion the bold to achieve the extraordinary</h2>
+        <p>Our success stems from the synergy between dedicated teams and our valued clients. We prioritize a company culture that fosters exceptional productivity, ensures customer satisfaction, and promotes mutual respect among all team members.</p>
+    </div>
+    <div class="teamFew">
+        <div>
+            <img src="/public/img/ceo.png" alt="">
+            <p>CEO at Company</p>
+            <h3>Sarah Jasmine</h3>
+           <p>Driving innovation and leadership with a focus on strategic growth and impactful decisions.</p> 
+            <div class="icons">
+               <img src="" alt="instagram"> 
+               <img src="" alt="facebook">
+               <img src="" alt="twitter">
+            </div>
+        </div>
+        <div>
+            <img src="/public/img/manager.png" alt="">
+            <h3>John Carter</h3>
+           <p>Expert in operational efficiency, ensuring smooth processes and exceptional team performance.</p> 
+            <div class="icons">
+               <img src="" alt="instagram"> 
+               <img src="" alt="facebook">
+               <img src="" alt="twitter">
+            </div>
+        </div>
+        <div>
+            <img src="/public/img/visionary.png" alt="">
+            <h3>Daisy Stella</h3>
+           <p>Inspiring creative solutions and forward-thinking approaches for groundbreaking projects.</p> 
+            <div class="icons">
+               <img src="" alt="instagram"> 
+               <img src="" alt="facebook">
+               <img src="" alt="twitter">
+            </div>
+        </div>
+    </div>
+</section>
+<Faq />
+<Newsletter />
 
 </Layout>
+
+<style>
+@layer components {
+    .banner {
+        grid-column: full;
+    }
+.ourVision {
+    grid-column: content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.info {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat h2 {
+    margin: 0;
+}
+
+.stat p {
+    margin: 0;
+}
+
+.ourTeamFew {
+    grid-column: content;
+    grid-template-rows: auto auto;
+    padding-bottom: 3rem;
+}
+.teamFew {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+}
+</style>

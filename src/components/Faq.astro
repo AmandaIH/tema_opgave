@@ -1,0 +1,70 @@
+---
+//@ts-check;
+let faqData = [];
+let errorMessage = "";
+
+try {
+  const res = await fetch('https://frontend-design-theme.netlify.app/api/faq'); // Din API URL
+  const data = await res.json();
+  
+  if (Array.isArray(data)) {
+    faqData = data; // Hvis API'en returnerer et array
+  } else if (data && data.faq && Array.isArray(data.faq)) {
+    faqData = data.faq; // Hvis data.faq eksisterer og er et array
+  } else {
+    throw new Error("API did not return valid FAQ data.");
+  }
+} catch (error) {
+  console.error("Failed to fetch FAQ data:", error);
+  errorMessage = "There was an error loading the FAQ data. Please try again later."; // Sæt en fejlmeddelelse
+}
+---
+
+<section class="faq">
+  {errorMessage ? (
+    <p>{errorMessage}</p> // Hvis der er en fejl, vis fejlmeddelelsen
+  ) : faqData.length > 0 ? (
+    faqData.map(({ id, question, answer }) => (
+      <details name="accordion" {id}>
+        <summary>
+          <span>{question}</span>
+        </summary>
+        <div class="answer">
+          <p>{answer}</p>
+        </div>
+      </details>
+    ))
+  ) : (
+    <p>Loading FAQ...</p> // Hvis faqData er tomt, vis "Loading"
+  )}
+</section>
+
+<style>
+  .faq {
+    grid-column: content;
+    margin-top: 3rem;
+    background: #f5f5f5;
+    padding: 2rem;
+  }
+
+  details {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+  }
+
+  summary {
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .answer {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    color: #595566;
+  }
+
+  .answer p {
+    margin: 0;
+  }
+</style>
